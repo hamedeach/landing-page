@@ -18,12 +18,22 @@
  * 
 */
 
-// create doc fragment to load all sections 
 
 
-// variable for the existing sections in the page
+const observer = new IntersectionObserver(function (observersSection) {
 
-// variable for the existing Navigation list
+    if (observersSection[0].isIntersecting) {
+        removeActiveSection();
+        let currentSection = observersSection[0].target
+        currentSection.classList.add('your-active-class');
+       
+    }
+
+
+}, {
+    threshold: [0.8]
+
+});
 
 
 /**
@@ -33,12 +43,16 @@
 */
 
 // 
+function removeActiveSection() {
+    const currentSections = document.getElementsByTagName('section');
+    for (let i = 0; i < currentSections.length; i++) {
+        currentSections[i].classList.remove('your-active-class');
+    }
+};
+
 function respondToTheClick(evt) {
     if (evt.target.nodeName.toLowerCase() === 'li') {
-        const currentSections = document.getElementsByTagName('section');
-        for (let i = 0; i < currentSections.length; i++) {
-            currentSections[i].classList.remove('your-active-class');
-        }
+        removeActiveSection();
         const selectedSection = document.getElementById(evt.target.getAttribute("data-section-id"));
         selectedSection.classList.add('your-active-class');
         selectedSection.scrollIntoView();
@@ -46,11 +60,8 @@ function respondToTheClick(evt) {
         selectedSection.scrollIntoView({ block: "end" });
         selectedSection.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
 
-
-
-        
     }
-}
+};
 
 
 function buildNav() {
@@ -59,6 +70,7 @@ function buildNav() {
     const currentSections = document.getElementsByTagName('section');
     for (let i = 1; i <= currentSections.length; i++) {
         let newElement = document.createElement('li');
+        observer.observe(currentSections[i - 1]);
         newElement.textContent = currentSections[i - 1].getAttribute("data-nav");
         newElement.setAttribute("id", 'nav-section' + i);
         newElement.setAttribute("data-section-id", 'section' + i);
@@ -69,6 +81,14 @@ function buildNav() {
     myCustomDiv.addEventListener('click', respondToTheClick);
     currentNavList.appendChild(myCustomDiv);
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -114,6 +134,8 @@ function update() {
 // build the nav
 
 buildNav();
+
+
 
 
 // Add class 'active' to section when near top of viewport
