@@ -34,26 +34,34 @@
 
 // 
 function respondToTheClick(evt) {
-    if (evt.target.nodeName.toLowerCase() === 'li'){
-        const selectedSection =document.getElementById(evt.target.getAttribute("data-section-id"));
+    if (evt.target.nodeName.toLowerCase() === 'li') {
+        const currentSections = document.getElementsByTagName('section');
+        for (let i = 0; i < currentSections.length; i++) {
+            currentSections[i].classList.remove('your-active-class');
+        }
+        const selectedSection = document.getElementById(evt.target.getAttribute("data-section-id"));
         selectedSection.classList.add('your-active-class');
         selectedSection.scrollIntoView();
         selectedSection.scrollIntoView(false);
-        selectedSection.scrollIntoView({block: "end"});
-        selectedSection.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+        selectedSection.scrollIntoView({ block: "end" });
+        selectedSection.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+
+
+
+        
     }
 }
 
 
-function buildNav(){
+function buildNav() {
     let currentNavList = document.getElementById('navbar__list');
     const myCustomDiv = document.createElement('div');
     const currentSections = document.getElementsByTagName('section');
     for (let i = 1; i <= currentSections.length; i++) {
         let newElement = document.createElement('li');
-        newElement.textContent = currentSections[i-1].getAttribute("data-nav") ;
-        newElement.setAttribute("id", 'nav-section'+i);
-        newElement.setAttribute("data-section-id", 'section'+i);
+        newElement.textContent = currentSections[i - 1].getAttribute("data-nav");
+        newElement.setAttribute("id", 'nav-section' + i);
+        newElement.setAttribute("data-section-id", 'section' + i);
         newElement.classList.add('menu__link');
         newElement.classList.add('navbar__menu');
         myCustomDiv.appendChild(newElement);
@@ -64,6 +72,38 @@ function buildNav(){
 
 
 
+/*
+function getscreenSize() {
+    return [ window.screen.width, window.screen.height];
+}
+
+function update() {
+
+    const currentSections = document.getElementsByTagName('section');
+    const rect = currentSections[0].getBoundingClientRect();
+        console.log("");
+        console.log("");
+        console.log("---------------------------------------------------");
+        console.log( currentSections[0].getAttribute("data-nav") );
+        console.log(rect.top);
+        console.log('screen size w='+window.screen.width+" H="+window.screen.height);
+        console.log("---------------------------------------------------");
+    
+    for (let i = 1; i <= currentSections.length; i++) {
+        const rect = currentSections[i-1].getBoundingClientRect();
+        console.log("");
+        console.log("");
+        console.log("---------------------------------------------------");
+        console.log( currentSections[i-1].getAttribute("data-nav") );
+        console.log(rect);
+        console.log('screen size w='+window.screen.width+" H="+window.screen.height);
+        console.log("---------------------------------------------------");
+
+    }
+    
+
+  }
+  */
 
 /**
  * End Helper Functions
@@ -85,7 +125,7 @@ buildNav();
 /**
  * End Main Functions
  * Begin Events
- * 
+ *
 */
 
 // Build menu 
