@@ -19,19 +19,9 @@
 */
 
 
-
-const observer = new IntersectionObserver(function (observersSection) {
-
-    if (observersSection[0].isIntersecting) {
-        removeActiveSection();
-        let currentSection = observersSection[0].target
-        currentSection.classList.add('your-active-class');
-       
-    }
-
-
-}, {
-    threshold: [0.8]
+// intersection observer API  threshold  = 70%
+const observer = new IntersectionObserver(observerFunc, {
+    threshold: [0.7]
 
 });
 
@@ -43,6 +33,23 @@ const observer = new IntersectionObserver(function (observersSection) {
 */
 
 // 
+/*
+function for the intersection observer API, this function used to remove active class for all sections and add active class to the section on the viewport
+*/
+function observerFunc (observersSection) {
+
+    if (observersSection[0].isIntersecting) {
+        removeActiveSection();
+        let currentSection = observersSection[0].target
+        currentSection.classList.add('your-active-class');
+    }
+
+
+}
+
+/*
+Helper function used to remove active class from all section 
+*/
 function removeActiveSection() {
     const currentSections = document.getElementsByTagName('section');
     for (let i = 0; i < currentSections.length; i++) {
@@ -50,20 +57,22 @@ function removeActiveSection() {
     }
 };
 
+/*
+callback function for nav buttons click, this function used to scroll to selected section 
+*/
 function respondToTheClick(evt) {
     if (evt.target.nodeName.toLowerCase() === 'li') {
-        removeActiveSection();
         const selectedSection = document.getElementById(evt.target.getAttribute("data-section-id"));
-        selectedSection.classList.add('your-active-class');
         selectedSection.scrollIntoView();
         selectedSection.scrollIntoView(false);
         selectedSection.scrollIntoView({ block: "end" });
         selectedSection.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-
     }
 };
 
-
+/*
+function used to create nav button according to added sections 
+*/
 function buildNav() {
     let currentNavList = document.getElementById('navbar__list');
     const myCustomDiv = document.createElement('div');
@@ -85,74 +94,17 @@ function buildNav() {
 
 
 
-
-
-
-
-
-
-
-/*
-function getscreenSize() {
-    return [ window.screen.width, window.screen.height];
-}
-
-function update() {
-
-    const currentSections = document.getElementsByTagName('section');
-    const rect = currentSections[0].getBoundingClientRect();
-        console.log("");
-        console.log("");
-        console.log("---------------------------------------------------");
-        console.log( currentSections[0].getAttribute("data-nav") );
-        console.log(rect.top);
-        console.log('screen size w='+window.screen.width+" H="+window.screen.height);
-        console.log("---------------------------------------------------");
-    
-    for (let i = 1; i <= currentSections.length; i++) {
-        const rect = currentSections[i-1].getBoundingClientRect();
-        console.log("");
-        console.log("");
-        console.log("---------------------------------------------------");
-        console.log( currentSections[i-1].getAttribute("data-nav") );
-        console.log(rect);
-        console.log('screen size w='+window.screen.width+" H="+window.screen.height);
-        console.log("---------------------------------------------------");
-
-    }
-    
-
-  }
-  */
-
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
 */
 
-// build the nav
-
+// call building function at page load
 buildNav();
 
 
 
 
-// Add class 'active' to section when near top of viewport
 
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- *
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
 
