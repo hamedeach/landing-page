@@ -39,10 +39,10 @@ This project for Udacity Front End Developer Nanodegree
 
 # Development
 [(Back to top)](#table-of-contents)
-this project written by javascripst, html and CSS
 
 
-### Adding new features or fixing bugs
+
+### this project written by javascripst, html and CSS
 [(Back to top)](#table-of-contents)
 
 
