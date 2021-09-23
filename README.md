@@ -25,11 +25,11 @@ This project requires you to build a multi-section landing page, with a dynamica
 [(Back to top)](#table-of-contents)
 
 css
-- styles.css    
-index.html
+    -styles.css    
 js
-- app.js
-README.md
+    -app.js
+-index.html
+-README.md
 
 
 # Usage
