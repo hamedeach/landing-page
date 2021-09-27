@@ -63,9 +63,6 @@ callback function for nav buttons click, this function used to scroll to selecte
 function respondToTheClick(evt) {
     if (evt.target.nodeName.toLowerCase() === 'li') {
         const selectedSection = document.getElementById(evt.target.getAttribute("data-section-id"));
-        selectedSection.scrollIntoView();
-        selectedSection.scrollIntoView(false);
-        selectedSection.scrollIntoView({ block: "end" });
         selectedSection.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
     }
 };
