@@ -21,7 +21,7 @@
 
 // intersection observer API  threshold  = 70%
 const observer = new IntersectionObserver(observerFunc, {
-    threshold: [0.7]
+    threshold: [0.6]
 
 });
 
@@ -36,7 +36,7 @@ const observer = new IntersectionObserver(observerFunc, {
 /*
 function for the intersection observer API, this function used to remove active class for all sections and add active class to the section on the viewport
 */
-function observerFunc (observersSection) {
+function observerFunc(observersSection) {
 
     if (observersSection[0].isIntersecting) {
         removeActiveSection();
@@ -63,7 +63,7 @@ callback function for nav buttons click, this function used to scroll to selecte
 function respondToTheClick(evt) {
     if (evt.target.nodeName.toLowerCase() === 'li') {
         const selectedSection = document.getElementById(evt.target.getAttribute("data-section-id"));
-        selectedSection.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        selectedSection.scrollIntoView({alignToTop:"false", behavior: "smooth", block: "start", inline: "start" });
     }
 };
 
